@@ -1,0 +1,22 @@
+{
+  "name": "cloudflare-blog",
+  "version": "1.0.0",
+  "description": "静态博客网站，部署在Cloudflare Workers上",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js",
+    "deploy": "npx wrangler deploy index.js --assets=./ --name=cloudflare-blog --compatibility-date=2025-08-26 --verbose"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "blog",
+    "static-site"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.2.0"
+  }
+}
