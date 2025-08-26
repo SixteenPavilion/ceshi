@@ -1,6 +1,0 @@
-name = "static-websites"
-main = "index.js"
-compatibility_date = "2023-08-26"
-
-[site]
-bucket = "."
