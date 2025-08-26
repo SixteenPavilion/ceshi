@@ -1,0 +1,9 @@
+name = "cloudflare-blog"
+type = "webpack"
+build.command = ""
+
+account_id = "" # 请在此处填写您的Cloudflare账户ID
+bucket = "."
+workers_dev = true
+route = "" # 可选：如果您有自定义域名，可以在此处设置
+compatibility_date = "2023-08-26"

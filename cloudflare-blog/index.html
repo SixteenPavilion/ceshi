@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斩阎罗</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // 页面加载后立即显示默认诗句
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加备用诗句库，确保即使API不可用也有内容显示
+            const backupPoems = [
+                '天生我材必有用，千金散尽还复来',
+                '长风破浪会有时，直挂云帆济沧海',
+                '桃花潭水深千尺，不及汪伦送我情',
+                '举头望明月，低头思故乡',
+                '欲穷千里目，更上一层楼',
+                '海内存知己，天涯若比邻',
+                '床前明月光，疑是地上霜',
+                '野火烧不尽，春风吹又生',
+                '谁知盘中餐，粒粒皆辛苦',
+                '少壮不努力，老大徒伤悲'
+            ];
+            
+            // 获取随机备用诗句
+            function getRandomBackupPoem() {
+                const randomIndex = Math.floor(Math.random() * backupPoems.length);
+                return backupPoems[randomIndex];
+            }
+            
+            // 立即设置一个随机的备用诗句作为初始显示
+            const poemTitle = document.getElementById('poem-title');
+            if (poemTitle) {
+                poemTitle.textContent = getRandomBackupPoem();
+            }
+            
+            // 然后尝试从API获取新的诗句（非阻塞方式）
+            try {
+                // 使用更简单的fetch调用
+                fetch('https://api.apiopen.top/api/sentences')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('API响应异常');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data && data.code === 200 && data.result && data.result.content) {
+                            // 如果API调用成功，更新标题为新的诗句
+                            const poemTitle = document.getElementById('poem-title');
+                            if (poemTitle) {
+                                poemTitle.textContent = data.result.content;
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.log('API调用失败，继续使用备用诗句:', error);
+                        // 不做任何操作，保持使用备用诗句
+                    });
+            } catch (error) {
+                console.log('JavaScript执行错误:', error);
+                // 不做任何操作，保持使用备用诗句
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1 id="poem-title">天生我材必有用，千金散尽还复来</h1>
+    </header>
+    <main>
+        <!-- 第一篇文章：呆瓜项目 -->
+        <article class="post">
+            <h2>呆瓜项目，五五分</h2>
+            <div class="content">
+                <p>五五分，单号50-100+。</p>
+                <div class="image-gallery">
+                    <img src="images/微信图片_20250826215159_33.jpg" alt="代挂图片1" class="post-image">
+                    <img src="images/微信图片_20250826215159_34.jpg" alt="代挂图片2" class="post-image">
+                </div>
+            </div>
+        </article>
+        
+        <!-- 第二篇文章：QQ群不定期分享羊毛 -->
+        <article class="post">
+            <h2>QQ群不定期分享羊毛</h2>
+            <div class="content">
+                <p>8.26号部分大毛</p>
+                <div class="image-gallery">
+                    <img src="images/微信图片_20250826215159_24.jpg" alt="羊毛图片1" class="post-image">
+                    <img src="images/微信图片_20250826215159_25.jpg" alt="羊毛图片2" class="post-image">
+                    <img src="images/微信图片_20250826215159_26.jpg" alt="羊毛图片3" class="post-image">
+                    <img src="images/微信图片_20250826215159_27.jpg" alt="羊毛图片4" class="post-image">
+                    <img src="images/微信图片_20250826215159_28.jpg" alt="羊毛图片5" class="post-image">
+                    <img src="images/微信图片_20250826215159_29.jpg" alt="羊毛图片6" class="post-image">
+                    <img src="images/微信图片_20250826215159_30.jpg" alt="羊毛图片7" class="post-image">
+                    <img src="images/微信图片_20250826215159_31.jpg" alt="羊毛图片8" class="post-image">
+                    <img src="images/微信图片_20250826215159_32.jpg" alt="羊毛图片9" class="post-image">
+                </div>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2025.8.26</p>
+    </footer>
+</body>
+</html>
